@@ -1,102 +1,128 @@
 import Image from "next/image";
+import Link from "next/link";
+
+const PRIMARY_BLUE = "#2563a6";
+const LIGHT_BLUE = "#eaf2fb";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="bg-white min-h-screen flex flex-col font-sans">
+      {/* Hero Section */}
+      <section
+        className="w-full flex flex-col items-center justify-center text-center py-16 px-4"
+        style={{
+          background: `linear-gradient(135deg, ${LIGHT_BLUE} 0%, #fafdff 100%)`,
+        }}
+      >
+        <div className="mb-6 flex flex-col items-center">
+          <div className="bg-white rounded-full shadow-lg p-3 mb-3" style={{ boxShadow: "0 4px 24px 0 rgba(37,99,166,0.10)" }}>
+            <Image src="/le-logo.png" alt="Leading-Edge Logo" width={90} height={90} />
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-extrabold" style={{ color: PRIMARY_BLUE, letterSpacing: "0.01em" }}>LEADING-EDGE</h1>
+          <div className="text-lg sm:text-xl font-medium mt-2 mb-4" style={{ color: PRIMARY_BLUE, letterSpacing: "0.04em" }}>
+            A TOTAL SOLUTION FOR EMPLOYMENT
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+          <Link
+            href="#employers"
+            className="px-7 py-3 rounded-full font-semibold shadow-md text-white bg-[#2563a6] hover:bg-[#17406b] transition border-2 border-[#2563a6] text-lg"
+          >
+            I'm Hiring
+          </Link>
+          <Link
+            href="/apply"
+            className="px-7 py-3 rounded-full font-semibold shadow-md text-[#2563a6] bg-white hover:bg-[#eaf2fb] transition border-2 border-[#2563a6] text-lg"
+          >
+            I'm Looking for Work
+          </Link>
+        </div>
+      </section>
+
+      {/* Employers Section */}
+      <section id="employers" className="py-12 px-4 w-full flex justify-center" style={{ background: LIGHT_BLUE }}>
+        <div className="max-w-3xl w-full bg-white rounded-2xl shadow-md p-8 border border-blue-100">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: PRIMARY_BLUE }}>For Employers</h2>
+          <p className="mb-4 text-gray-700">We help Singapore SMEs hire reliable foreign workers in:</p>
+          <div className="flex flex-wrap gap-3 justify-center mb-6">
+            <span className="bg-[#eaf2fb] text-[#2563a6] px-4 py-2 rounded-full font-medium border border-[#c6d6ea]">F&amp;B</span>
+            <span className="bg-[#eaf2fb] text-[#2563a6] px-4 py-2 rounded-full font-medium border border-[#c6d6ea]">Construction</span>
+            <span className="bg-[#eaf2fb] text-[#2563a6] px-4 py-2 rounded-full font-medium border border-[#c6d6ea]">Caregivers</span>
+            <span className="bg-[#eaf2fb] text-[#2563a6] px-4 py-2 rounded-full font-medium border border-[#c6d6ea]">Domestic Helpers</span>
+          </div>
+          <Link
+            href="/contact"
+            className="inline-block px-7 py-3 bg-[#2563a6] text-white rounded-full font-semibold shadow hover:bg-[#17406b] transition border-2 border-[#2563a6] text-lg"
+          >
+            Contact Us to Hire Workers
+          </Link>
+        </div>
+      </section>
+
+      {/* Job Seekers Section */}
+      <section className="py-12 px-4 w-full flex justify-center">
+        <div className="max-w-3xl w-full bg-white rounded-2xl shadow-md p-8 border border-blue-100">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: PRIMARY_BLUE }}>For Job Seekers</h2>
+          <p className="mb-4 text-gray-700">Looking for work in Singapore? We offer opportunities in various industries for candidates from Bangladesh, India, China, and Southeast Asia.</p>
+          <Link
+            href="/apply"
+            className="inline-block px-7 py-3 bg-green-600 text-white rounded-full font-semibold shadow hover:bg-green-700 transition border-2 border-green-600 text-lg"
+          >
+            Apply to Work in Singapore for $1
+          </Link>
+        </div>
+      </section>
+
+      {/* Testimonials Carousel (static for now) */}
+      <section className="py-12 px-4 w-full flex justify-center" style={{ background: LIGHT_BLUE }}>
+        <div className="max-w-4xl w-full">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center" style={{ color: PRIMARY_BLUE }}>What Our Clients Say</h2>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-stretch">
+            <div className="bg-white rounded-2xl shadow p-6 flex-1 border border-blue-100">
+              <p className="text-gray-700 italic mb-2">“The agency made hiring so easy. We found reliable staff for our restaurant in just days!”</p>
+              <span className="block text-sm text-gray-500">– Mr. Tan, F&amp;B Owner</span>
+            </div>
+            <div className="bg-white rounded-2xl shadow p-6 flex-1 border border-blue-100">
+              <p className="text-gray-700 italic mb-2">“I applied from Bangladesh and got a job in Singapore quickly. Thank you!”</p>
+              <span className="block text-sm text-gray-500">– Rahim, Worker</span>
+            </div>
+            <div className="bg-white rounded-2xl shadow p-6 flex-1 border border-blue-100">
+              <p className="text-gray-700 italic mb-2">“Professional and trustworthy. Highly recommended for employers.”</p>
+              <span className="block text-sm text-gray-500">– Ms. Lim, Construction</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-12 px-4 w-full flex justify-center">
+        <div className="max-w-3xl w-full bg-white rounded-2xl shadow-md p-8 border border-blue-100 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: PRIMARY_BLUE }}>About Leading-Edge Consultancy</h2>
+          <p className="text-gray-700 mb-4">Leading-Edge Consultancy Services Pte Ltd is a Singapore-based employment agency dedicated to connecting SMEs with skilled foreign workers. Our team ensures a smooth, transparent, and efficient hiring process for both employers and job seekers.</p>
+          <div className="text-gray-600 text-sm mt-2">
+            60 Paya Lebar Road, #07-54 Paya Lebar Square, Singapore 409051<br />
+            EA Licence No.: 12C6068 &nbsp;|&nbsp; Personal EA No.: R1108879
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#2563a6] text-white py-10 px-4 mt-auto">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="text-center sm:text-left">
+            <div className="font-bold text-lg">Leading-Edge Consultancy Services Pte Ltd</div>
+            <div className="text-sm mt-1">Simon Tseng, Senior Recruitment Consultant</div>
+            <div className="text-sm mt-1">Phone: <a href="tel:+6590026161" className="underline">+65 90026161</a></div>
+            <div className="text-sm">WhatsApp: <a href="https://wa.me/6590026161" className="underline">+65 90026161</a></div>
+            <div className="text-sm">Email: <a href="mailto:stleading@gmail.com" className="underline">stleading@gmail.com</a></div>
+            <div className="text-xs text-blue-100 mt-2">EA Licence No.: 12C6068 | Personal EA No.: R1108879</div>
+          </div>
+          <div className="w-full sm:w-1/3 h-32 bg-blue-100 rounded-lg flex items-center justify-center mt-4 sm:mt-0">
+            {/* Google Maps Placeholder */}
+            <span className="text-blue-500">[Google Maps Location]</span>
+          </div>
+        </div>
+        <div className="text-center text-xs text-blue-100 mt-4">&copy; {new Date().getFullYear()} Leading-Edge Consultancy Services Pte Ltd. All rights reserved.</div>
       </footer>
     </div>
   );
