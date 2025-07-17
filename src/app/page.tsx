@@ -34,7 +34,7 @@ export default function Home() {
             href="/apply"
             className="px-7 py-3 rounded-full font-semibold shadow-md text-[#2563a6] bg-white hover:bg-[#eaf2fb] transition border-2 border-[#2563a6] text-lg"
           >
-            I'm Looking for Work
+            I&apos;m Looking for Work
           </Link>
         </div>
       </section>
