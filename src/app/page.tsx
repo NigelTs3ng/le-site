@@ -63,13 +63,22 @@ export default function Home() {
       <section className="py-12 px-4 w-full flex justify-center">
         <div className="max-w-3xl w-full bg-white rounded-2xl shadow-md p-8 border border-blue-100">
           <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: PRIMARY_BLUE }}>For Job Seekers</h2>
-          <p className="mb-4 text-gray-700">Looking for work in Singapore? We offer opportunities in various industries for candidates from Bangladesh, India, China, and Southeast Asia.</p>
-          <Link
+          <p className="mb-4 text-gray-700">Submit your resume into our database for companies to find you and get the process started.</p>
+          <ul className="mb-4 text-gray-700 list-disc list-inside">
+            <li>One-time registration/processing fee. You can use or resubmit your profile anytime.</li>
+            <li>Get yourself registered for this amount.</li>
+            <li>Come direct to us and avoid middlemen fees in your country.</li>
+          </ul>
+          <a
             href="/apply"
-            className="inline-block px-7 py-3 bg-green-600 text-white rounded-full font-semibold shadow hover:bg-green-700 transition border-2 border-green-600 text-lg"
+            className="inline-block px-7 py-3 bg-green-600 text-white rounded-full font-semibold shadow hover:bg-green-700 transition border-2 border-green-600 text-lg mb-4"
           >
-            Apply to Work in Singapore for $1
-          </Link>
+            Register Now
+          </a>
+          <div className="mt-4 text-sm text-blue-700 font-medium">
+            <span>Check for yourself: </span>
+            <a href="https://service2.mom.gov.sg/eadirectory/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-900">MOM Agency Directory</a>
+          </div>
         </div>
       </section>
 
