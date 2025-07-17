@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function ApplyPage() {
   const [refId, setRefId] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit() {
     const randomId = Math.floor(1000 + Math.random() * 9000);
     setRefId(`SG2025-${randomId}`);
   }

@@ -28,7 +28,7 @@ export default function Home() {
             href="#employers"
             className="px-7 py-3 rounded-full font-semibold shadow-md text-white bg-[#2563a6] hover:bg-[#17406b] transition border-2 border-[#2563a6] text-lg"
           >
-            I'm Hiring
+            I&apos;m Hiring
           </Link>
           <Link
             href="/apply"
