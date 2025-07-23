@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: `${origin}/thank-you`,
+      success_url: `${origin}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/apply?canceled=1`,
       metadata: applicationData,
     });
