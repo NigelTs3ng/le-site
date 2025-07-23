@@ -98,6 +98,7 @@ export default function AdminPage() {
     <div className="min-h-screen bg-blue-50 flex flex-col items-center py-10 px-4">
       <div className="w-full max-w-4xl bg-white rounded-xl shadow-lg p-8">
         <div className="flex justify-between items-center mb-6">
+          
           <h1 className="text-2xl font-bold text-blue-900">Admin Submissions</h1>
           <button onClick={signOutUser} className="text-blue-600 underline">Sign out</button>
         </div>
