@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   let file_url = '';
   if (file) {
     const filePath = `resumes/${Date.now()}-${file.name}`;
-    const { data, error } = await supabase.storage.from('resumes').upload(filePath, file, { contentType: file.type });
+    const { error } = await supabase.storage.from('resumes').upload(filePath, file, { contentType: file.type });
     if (error) throw error;
     file_url = supabase.storage.from('resumes').getPublicUrl(filePath).data.publicUrl;
   }

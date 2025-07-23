@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import nodemailer from 'nodemailer';
 import { unlink } from 'fs/promises';
-import path from 'path';
+// import path from 'path'; // removed unused import
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-06-30.basil',
@@ -26,8 +26,9 @@ export async function POST(req: NextRequest) {
 
   try {
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-  } catch (err: any) {
-    return NextResponse.json({ error: `Webhook error: ${err.message}` }, { status: 400 });
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: `Webhook error: ${errorMsg}` }, { status: 400 });
   }
 
   if (event.type === 'checkout.session.completed') {
@@ -52,8 +53,9 @@ export async function POST(req: NextRequest) {
 
     try {
       await transporter.sendMail(mailOptions);
-    } catch (error: any) {
-      console.error('Failed to send email:', error);
+    } catch (error: unknown) {
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      console.error('Failed to send email:', errorMsg);
       // Don't delete the file if the email fails, so we can retry
       return NextResponse.json({ error: 'Failed to send submission email.' }, { status: 500 });
     } finally {

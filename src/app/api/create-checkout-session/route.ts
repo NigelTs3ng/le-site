@@ -37,8 +37,9 @@ export async function POST(req: NextRequest) {
       metadata: applicationData,
     });
     return NextResponse.json({ id: session.id });
-  } catch (err: any) {
-    console.error('Stripe error:', err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error('Stripe error:', errorMsg);
+    return NextResponse.json({ error: errorMsg }, { status: 500 });
   }
 } 
