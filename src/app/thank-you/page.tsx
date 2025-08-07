@@ -24,6 +24,10 @@ function ThankYouContent() {
       const form = JSON.parse(localStorage.getItem("pendingFormData") || "{}");
       const fileDataUrl = localStorage.getItem("pendingFile");
       
+      // Debug: Log the form data to see what's being retrieved
+      console.log("Form data from localStorage:", form);
+      console.log("Form data keys:", Object.keys(form));
+      
       if (paymentMethod === "paypal") {
         // For PayPal payments, we don't need to verify with Stripe
         // The payment verification already happened on the client side
@@ -58,7 +62,16 @@ function ThankYouContent() {
       } else {
         // Handle Stripe payment (existing flow)
         const formData = new FormData();
-        Object.entries(form).forEach(([k, v]) => formData.append(k, v as string));
+        
+        // Ensure all form fields are properly mapped
+        Object.entries(form).forEach(([k, v]) => {
+          if (k === "countryCode") {
+            formData.append("countryCode", v as string);
+          } else {
+            formData.append(k, v as string);
+          }
+        });
+        
         if (fileDataUrl) {
           // Convert DataURL back to File
           const arr = fileDataUrl.split(",");

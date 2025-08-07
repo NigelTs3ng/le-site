@@ -19,10 +19,30 @@ export async function POST(req: NextRequest) {
   // Extract form fields
   const fields: Record<string, string> = {};
   let file: File | null = null;
+  
+  // Debug: Log all form data
+  console.log("Form data entries:");
+  for (const [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+  
   for (const [key, value] of formData.entries()) {
     if (key === "file" && value instanceof File) file = value;
-    else if (key !== "session_id") fields[key] = value as string;
+    else if (key !== "session_id") {
+      // Map frontend field names to database column names
+      if (key === "countryCode") {
+        fields["country_code"] = value as string;
+      } else if (key === "phone") {
+        // Store phone number as-is (without country code)
+        fields["phone"] = value as string;
+      } else {
+        fields[key] = value as string;
+      }
+    }
   }
+  
+  // Debug: Log processed fields
+  console.log("Processed fields:", fields);
 
   // Upload file to Supabase
   let file_url = '';
