@@ -8,17 +8,46 @@ export default function ContactPage() {
           action="https://formspree.io/f/your-form-id" // TODO: Replace with real Formspree ID
           method="POST"
         >
-          <label className="block mb-2 font-medium">Name *</label>
-          <input name="name" required className="w-full mb-4 px-3 py-2 border rounded" />
+          <div className="mb-4">
+            <label className="block font-medium mb-2 text-gray-700">Name *</label>
+            <input 
+              name="name" 
+              required 
+              placeholder="Enter your full name"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+            />
+          </div>
 
-          <label className="block mb-2 font-medium">Email *</label>
-          <input name="email" type="email" required className="w-full mb-4 px-3 py-2 border rounded" />
+          <div className="mb-4">
+            <label className="block font-medium mb-2 text-gray-700">Email *</label>
+            <input 
+              name="email" 
+              type="email" 
+              required 
+              placeholder="Enter your email address"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+            />
+          </div>
 
-          <label className="block mb-2 font-medium">Message *</label>
-          <textarea name="message" rows={3} required className="w-full mb-4 px-3 py-2 border rounded" />
+          <div className="mb-6">
+            <label className="block font-medium mb-2 text-gray-700">Message *</label>
+            <textarea 
+              name="message" 
+              rows={4} 
+              required 
+              placeholder="Enter your message"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" 
+            />
+          </div>
 
-          <button type="submit" className="w-full bg-blue-700 text-white py-3 rounded font-semibold hover:bg-blue-800 transition">Send Message</button>
+          <button 
+            type="submit" 
+            className="w-full bg-blue-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+          >
+            Send Message
+          </button>
         </form>
+        
         <div className="mt-8 text-center text-gray-700">
           <div className="font-bold">Leading-Edge Consultancy Services Pte Ltd</div>
           <div>60 Paya Lebar Road, #07-54 Paya Lebar Square, Singapore 409051</div>

@@ -7,24 +7,22 @@ export default function Navigation() {
   const [language, setLanguage] = useState("English");
 
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200">
+    <nav className="hidden lg:block bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Left side - Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="flex items-center space-x-2">
               <Image src="/le-logo.png" alt="LE" width={32} height={32} />
+              <span className="text-xs font-medium text-gray-600">LEADING-EDGE</span>
             </div>
             <span className="text-lg font-semibold text-blue-900">Leading Edge</span>
           </Link>
 
           {/* Right side - Navigation links and language selector */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="flex items-center space-x-6">
             <Link href="/apply" className="text-blue-900 hover:text-blue-600 transition-colors">
               Apply
-            </Link>
-            <Link href="/admin" className="text-blue-900 hover:text-blue-600 transition-colors">
-              Admin
             </Link>
             <Link href="/contact" className="text-blue-900 hover:text-blue-600 transition-colors">
               Contact
@@ -43,15 +41,6 @@ export default function Navigation() {
                 </svg>
               </button>
             </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button className="text-blue-900 hover:text-blue-600">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
         </div>
       </div>

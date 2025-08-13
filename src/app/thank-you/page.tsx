@@ -2,6 +2,7 @@
 import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function ThankYouPage() {
   return (
@@ -106,6 +107,11 @@ function ThankYouContent() {
             {paymentMethod === "paypal" && (
               <p className="text-sm text-gray-600 mt-2">Payment processed via PayPal</p>
             )}
+            <Link href="/">
+              <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                Back to Home
+              </button>
+            </Link>
           </>
         ) : (
           <>
