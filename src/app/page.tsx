@@ -52,7 +52,7 @@ export default function Home() {
           </div>
           <Link
             href="/contact"
-            className="inline-block px-7 py-3 bg-[#2563a6] text-white rounded-full font-semibold shadow hover:bg-[#17406b] transition border-2 border-[#2563a6] text-lg"
+            className="inline-block px-7 py-3 bg-[#2563a6] text-white rounded-full font-semibold shadow hover:bg-[#17406b] transition border-2 border-[#2563a6] text-lg w-full sm:w-auto text-center"
           >
             Contact Us to Hire Workers
           </Link>
