@@ -16,7 +16,7 @@ export default function Home() {
       >
         <div className="mb-6 flex flex-col items-center">
           <div className="mb-3">
-            <Image src="/le-logo.png" alt="Leading-Edge Logo" width={90} height={90} />
+            <Image src="/le-logo.png" alt="Logo" width={90} height={90} />
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white" style={{ letterSpacing: "0.01em" }}>LEADING-EDGE</h1>
           <div className="text-lg sm:text-xl font-medium mt-2 mb-4 text-white" style={{ letterSpacing: "0.04em" }}>
