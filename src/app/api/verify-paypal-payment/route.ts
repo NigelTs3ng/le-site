@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
             <div style="border-top: 1px solid #e0e0e0; padding-top: 20px; text-align: center;">
               <p style="margin: 0; color: #666; font-size: 12px;">
                 <strong>Leading Edge Consultancy Services Pte Ltd</strong><br>
-                60 Paya Lebar Road, #07-54 Paya Lebar Square, Singapore 409051<br>
+                60 Paya Lebar Road, #06-28 Paya Lebar Square, Singapore 409051<br>
                 EA Licence No.: 12C6068 | Personal EA No.: R1108879<br>
                 Phone: +65 90026161 | Email: stleading@gmail.com
               </p>

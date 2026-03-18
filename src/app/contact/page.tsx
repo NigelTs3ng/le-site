@@ -50,7 +50,11 @@ export default function ContactPage() {
         
         <div className="mt-8 text-center text-gray-700">
           <div className="font-bold">Leading-Edge Consultancy Services Pte Ltd</div>
-          <div>60 Paya Lebar Road, #07-54 Paya Lebar Square, Singapore 409051</div>
+          <div>
+            60 Paya Lebar Road<br />
+            #06-28 Paya Lebar Square<br />
+            Singapore 409051
+          </div>
           <div>Phone: <a href="tel:+6590026161" className="underline">+65 90026161</a></div>
           <div>WhatsApp: <a href="https://wa.me/6590026161" className="underline">+65 90026161</a></div>
           <div>Email: <a href="mailto:stleading@gmail.com" className="underline">stleading@gmail.com</a></div>

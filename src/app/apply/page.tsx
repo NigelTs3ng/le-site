@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Link from "next/link";
@@ -22,6 +22,15 @@ export default function ApplyPage() {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [paypalInitialized, setPaypalInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID) {
+      console.error('PayPal Client ID is not configured');
+      return;
+    }
+    setPaypalInitialized(true);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -32,9 +41,31 @@ export default function ApplyPage() {
     if (e.target.files && e.target.files[0]) setFile(e.target.files[0]);
   };
 
+  const validateForm = () => {
+    const requiredFields = ['name', 'email', 'phone', 'country', 'industry', 'description'];
+    const missingFields = requiredFields.filter(field => !form[field]);
+    
+    if (missingFields.length > 0) {
+      setError(`Please fill in all required fields: ${missingFields.join(', ')}`);
+      return false;
+    }
+    
+    if (!file) {
+      setError('Please upload your resume');
+      return false;
+    }
+    
+    return true;
+  };
+
   const handleStripePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setLoading(true);
     
     // Store form data with separate countryCode and phone fields
@@ -66,6 +97,8 @@ export default function ApplyPage() {
     clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
     currency: "SGD",
     intent: "capture",
+    components: "buttons",
+    enableStandardCardFields: true
   };
 
   return (
@@ -262,8 +295,24 @@ export default function ApplyPage() {
 
                 {/* PayPal Section */}
                 <div className="space-y-2">
+                  {!paypalInitialized && (
+                    <div className="text-yellow-600 text-sm text-center">Loading PayPal...</div>
+                  )}
                   <PayPalButtons
+                    forceReRender={[form, file]} // Re-render when form data changes
+                    style={{
+                      color: "blue",
+                      layout: "vertical",
+                      shape: "rect",
+                      label: "pay",
+                      height: 45
+                    }}
                     createOrder={(data, actions) => {
+                      // Validate form first
+                      if (!validateForm()) {
+                        throw new Error("Please fill in all required fields");
+                      }
+
                       // Store form data with separate fields
                       localStorage.setItem("pendingFormData", JSON.stringify(form));
                       if (file) {
@@ -319,4 +368,4 @@ export default function ApplyPage() {
     </div>
     </PayPalScriptProvider>
   );
-} 
+}
