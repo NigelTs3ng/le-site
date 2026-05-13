@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
             product_data: {
               name: 'Application Processing Fee',
             },
-            unit_amount: 699,
+            unit_amount: 399,
           },
           quantity: 1,
         },

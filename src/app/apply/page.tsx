@@ -1,7 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Link from "next/link";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -22,15 +21,6 @@ export default function ApplyPage() {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [paypalInitialized, setPaypalInitialized] = useState(false);
-
-  useEffect(() => {
-    if (!process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID) {
-      console.error('PayPal Client ID is not configured');
-      return;
-    }
-    setPaypalInitialized(true);
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -93,17 +83,8 @@ export default function ApplyPage() {
     }
   };
 
-  const paypalOptions = {
-    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
-    currency: "SGD",
-    intent: "capture",
-    components: "buttons",
-    enableStandardCardFields: true
-  };
-
   return (
-    <PayPalScriptProvider options={paypalOptions}>
-      <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-blue-50">
         {/* Professional Team Section */}
         <section className="w-full py-16 px-4" style={{ background: PRIMARY_BLUE }}>
           <div className="max-w-4xl mx-auto text-center">
@@ -271,101 +252,28 @@ export default function ApplyPage() {
             <div className="mb-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Payment</h3>
               <div className="bg-blue-50 rounded-lg p-4 mb-6">
-                <div className="text-lg font-semibold text-gray-900 mb-1">Registration Fee: $6.99 SGD</div>
+                <div className="text-lg font-semibold text-gray-900 mb-1">Registration Fee: $3.99 SGD</div>
                 <div className="text-sm text-gray-600">One-time registration fee. Your profile will be active and can be updated anytime.</div>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Stripe Payment Button */}
-                <button 
-                  type="submit" 
-                  onClick={handleStripePayment}
-                  disabled={loading} 
-                  className="w-full bg-blue-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
-                >
-                  {loading ? (
-                    <div className="flex items-center justify-center space-x-2">
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                      <span>Processing...</span>
-                    </div>
-                  ) : (
-                    "Pay with Card"
-                  )}
-                </button>
 
-                {/* PayPal Section */}
-                <div className="space-y-2">
-                  {!paypalInitialized && (
-                    <div className="text-yellow-600 text-sm text-center">Loading PayPal...</div>
-                  )}
-                  <PayPalButtons
-                    forceReRender={[form, file]} // Re-render when form data changes
-                    style={{
-                      color: "blue",
-                      layout: "vertical",
-                      shape: "rect",
-                      label: "pay",
-                      height: 45
-                    }}
-                    createOrder={(data, actions) => {
-                      // Validate form first
-                      if (!validateForm()) {
-                        throw new Error("Please fill in all required fields");
-                      }
-
-                      // Store form data with separate fields
-                      localStorage.setItem("pendingFormData", JSON.stringify(form));
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onload = () => {
-                          localStorage.setItem("pendingFile", reader.result as string);
-                        };
-                        reader.readAsDataURL(file);
-                      }
-
-                      return actions.order.create({
-                        intent: "CAPTURE",
-                        purchase_units: [
-                          {
-                            amount: {
-                              value: '6.99',
-                              currency_code: 'SGD'
-                            },
-                            description: 'Application Processing Fee'
-                          }
-                        ],
-                        application_context: {
-                          return_url: `${window.location.origin}/thank-you?payment_method=paypal`,
-                          cancel_url: `${window.location.origin}/apply?canceled=1&payment_method=paypal`
-                        }
-                      });
-                    }}
-                    onApprove={async (data, actions) => {
-                      console.log('PayPal payment approved...');
-                      // Capture the order
-                      const order = await actions.order?.capture();
-                      
-                      if (order) {
-                        // Just redirect to thank-you page, let it handle the email
-                        window.location.href = `/thank-you?payment_method=paypal&session_id=${order.id}`;
-                      }
-                    }}
-                    onError={(err) => {
-                      console.error('PayPal error:', err);
-                      setError("PayPal payment failed. Please try again.");
-                    }}
-                    onCancel={() => {
-                      console.log('PayPal payment cancelled');
-                      setError("PayPal payment was cancelled.");
-                    }}
-                  />
-                  <div className="text-xs text-gray-500 text-center">Powered by PayPal</div>
-                </div>
-              </div>
+              <button
+                type="submit"
+                onClick={handleStripePayment}
+                disabled={loading}
+                className="w-full bg-blue-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                {loading ? (
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  "Pay with Card"
+                )}
+              </button>
             </div>
-        </form>
-      </section>
-    </div>
-    </PayPalScriptProvider>
+          </form>
+        </section>
+      </div>
   );
 }
