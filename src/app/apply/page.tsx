@@ -76,9 +76,14 @@ export default function ApplyPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email }),
       });
-      const { id } = await res.json();
+      const data = await res.json();
+      if (!res.ok || !data.id) {
+        setError(data.error || "Failed to create checkout session. Please try again.");
+        setLoading(false);
+        return;
+      }
       const stripe = await stripePromise;
-      await stripe?.redirectToCheckout({ sessionId: id });
+      await stripe?.redirectToCheckout({ sessionId: data.id });
       setLoading(false);
     }
   };
