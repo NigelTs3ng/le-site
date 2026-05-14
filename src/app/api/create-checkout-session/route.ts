@@ -13,12 +13,7 @@ export async function POST(req: NextRequest) {
     const origin = `${protocol}://${host}`;
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card', 'alipay', 'grabpay', 'wechat_pay'],
-      payment_method_options: {
-        wechat_pay: {
-          client: 'web',
-        },
-      },
+      payment_method_types: ['card', 'grabpay'],
       line_items: [
         {
           price_data: {
