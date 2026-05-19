@@ -15,6 +15,7 @@ export default function PageWrapper({ children }: PageWrapperProps) {
   return (
     <LanguageProvider>
       {showNavigation && <Navigation />}
+      {/* LanguageToggle shown only on mobile (nav handles it on lg+) */}
       {showNavigation && <LanguageToggle />}
       {children}
     </LanguageProvider>

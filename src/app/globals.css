@@ -1,26 +1,28 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Fonts — CSS vars injected by next/font at runtime */
+  --font-display: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-sans:    var(--font-manrope),       "Manrope",       system-ui, sans-serif;
+  --font-mono:    var(--font-jetbrains),     "JetBrains Mono", ui-monospace, monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Colors */
+  --color-navy:         #0b1f3a;
+  --color-navy-deep:    #061a2e;
+  --color-cobalt:       #1d4ed8;
+  --color-cobalt-light: #3b82f6;
+  --color-cobalt-soft:  #9ec1ff;
+  --color-ice:          #e8eef9;
+  --color-paper:        #f4f6fb;
+  --color-mute:         #5a6b85;
+  --color-rule:         rgba(11, 31, 58, 0.12);
+
+  /* Radii */
+  --radius-card: 16px;
+  --radius-pill: 9999px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-sans text-navy antialiased;
+  background: #fff;
 }
